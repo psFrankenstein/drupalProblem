@@ -1,0 +1,11 @@
+if you have a problem of clean url in drupal 
+eg .url you have (abc.com/?q=home)
+want a clean url like (abc.com/home)
+try to enable clean url from admin/config in drupal  
+if you have somthing like this
+Use URLs like example.com/user instead of example.com/?q=user.
+
+Clean URLs cannot be enabled. If you are directed to this page or to a Page not found (404) error after testing for clean URLs, see the online handbook.
+
+and it always fails clean url test
+then you have to add given .htaccess file to your drupal root directory and you good to go
