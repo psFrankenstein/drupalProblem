@@ -1,4 +1,4 @@
-create a menu item and use a callback function  and  in that function call thay update query function
+create a menu item and use a callback function  and  in that function call the update query function
 take a database backup incase any error  
 
 
