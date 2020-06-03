@@ -1,0 +1,32 @@
+create a menu item and use a callback function  and  in that function call thay update query function
+take a database backup incase any error  
+
+
+If you want to update some fields programmatically, you must know node_save() and field_attach_update() functions.
+
+Node Save (node_save()):
+Create a new node or update existing node will use the node_save() function in Drupal 7 but when used node_save() to update filed it will update time stamp and other fields. Maybe this is won’t safe to update other fields for single update field by using node_save() but we can approach better by using field_attach_update() to update exits field.
+
+field_attach_update()
+field_attach_update() will not change any time stamp or any other hook that node_save usually invokes and field_attach_update saves the field data for an existing entity. It saves the field data value instead of the entire node
+
+Simple copy below code and change field name and value according to your code.
+
+<?php 
+  $node = node_load($nid); 
+  $node->field_fieldname[LANGUAGE_NONE][0]['value'] = 'some value to update';
+  field_attach_update('node', $node);
+?>
+Multiple Fields Update
+If you want to update multiple fields at a time for the specific content type by using field_attach_update(). Follow below example for more clarity.
+
+Here simple example to update all program ids field for a specific content type. In below, an example will load all program ids which is related to program content type
+
+<?php 
+$programNodes = node_load_multiple(array(), array('type' =>'program')); //enter your node name to fetch all id 
+foreach ($programNodes as $programID) {
+  $programID->field_fieldname[LANGUAGE_NONE][0]['value'] = 'New Value'; //put your new value want to update
+  field_attach_update('node', $programID);
+   entity_get_controller('node')->resetCache(array($programID)); //clean cache
+}
+?>
