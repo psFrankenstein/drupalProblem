@@ -6,3 +6,9 @@ credit
 |make sure you dont have large amount of data other wise you may get  504 Gateway Time-out error if 
 | you get that error  update your database with terminal 
 |---------------------------------------------------------------------------------------------------------------------------------
+
+|**********************|
+|504 Gateway Timeout   |
+|______________________|
+HTTP
+The server was acting as a gateway or proxy and did not receive a timely response from the upstream server
