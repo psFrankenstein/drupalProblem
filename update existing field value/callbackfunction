@@ -1,0 +1,19 @@
+function name_of_callback_function{
+$programNodes = node_load_multiple(array(), array('type' =>'nodename'));
+ 
+    $getData=0;
+    $values = array();
+foreach ($programNodes as $programID) {
+  $programID->field_signup_template[LANGUAGE_NONE][0]['value'] = '3';
+  field_attach_update('node', $programID);
+  array_push($values,$programID);
+  $getData=$getData+1; 
+} 
+entity_get_controller('node')->resetCache( $values );  //use this function out side of the loop 
+ if(count($programNodes)==$getData){
+     print("<p style='color:green;font-size:20px;'>".count($programNodes)." nodes updated successfully</p>");
+ }else{
+    print("<p style='color:red;font-size:20px;'>".$getData." nodes updated successfully from ".count($programNodes)." nodes</p>") ;
+ }
+ 
+ }
