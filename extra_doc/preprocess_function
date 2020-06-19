@@ -37,3 +37,44 @@ if ($variables['type'] == 'article')
 $variables['blabla'] = .. // creates a variable to be used in node.tpl.php
 }  
 then create node--article.tpl.php and print that $blabla there
+
+Example set from a module implementing the hook of "foo":
+
+function template_preprocess_foo(&$variables) {
+  $variables['foo_list'] = array(
+    'list item 1',
+    'list item 2',
+    'list item 3',
+  );
+  
+And the preprocessor created from the theme to add to the variable set above:
+function drop_preprocess_foo(&$variables) {
+  // Do not do this unless you mean to:
+  $variables['foo_list'] = array('list item 4');
+  
+  // Instead do this:
+  $variables['foo_list'][] = 'list item 4';
+}
+}
+
+
+When using a preprocessor not specific to a theming hook, a second parameter can be used which always passes the current hook. Using a more specialized preprocess function like the one shown above is easier to maintain but if there will be shared code for multiple theming hooks, you may want to opt for this instead.
+
+function drop_preprocess(&$variables, $hook) {
+
+  // Shared between the 'foo' and 'bar' theming hooks.
+  if ($hook == 'foo' || $hook == 'bar') {
+    $variables['foobar_item'] = 'foobar item';
+  }
+
+  // Specific to 'foo'.
+  if ($hook == 'foo') {
+    $variables['foo_item'] = 'foo item';
+  }
+  // Specific to 'bar'.
+  elseif ($hook == 'bar') {
+    $variables['bar_items'] = 'bar item';
+  }
+}
+
+
