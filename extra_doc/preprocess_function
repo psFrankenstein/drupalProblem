@@ -6,14 +6,14 @@ This file supports .tpl.php by providing new variables, changing variables, gett
 
 Inside template.php there are 4 categories of things one can do:
 
-write preprocess functions, like MYTHEME_preprocess_page(&$variables) or MYTHEME_preprocess_node(&$variables). 
+write preprocess functions, like ** MYTHEME_preprocess_page(&$variables) ** or ** MYTHEME_preprocess_node(&$variables)**. 
 With the aid of preprocess functions we can add or alter variables inside tpl.php files. 
 Our main weapon: kpr($variables) or dpm($variables) provided by the devel module.
-write theme functions like MYTHEME_links($variables) or MYTHEME_breadcrumb($variables). 
+write theme functions like **MYTHEME_links($variables) ** or ** MYTHEME_breadcrumb($variables) **. 
 Through theme functions we change the HTML output of some chunks of our site, like the breadcrumb. 
 Main weapon: devel themer. (We check which theme function is responsible for the HTML output and override that one)
 preprocess functions for theme functions. We manage to change a variable used in a theme function.
-For example, MYTHEME_preprocess_username(&$variables) prepares the variables for the theme_username(). We could put the code directly inside the corresponding theme functions, but then we would probably have a mess. (anyway, that's the idea behind the separation of the code here, and is not obligatory). Main weapon: kpr() or dpm()
+For example, ** MYTHEME_preprocess_username(&$variables) ** prepares the variables for the theme_username(). We could put the code directly inside the corresponding theme functions, but then we would probably have a mess. (anyway, that's the idea behind the separation of the code here, and is not obligatory). Main weapon: kpr() or dpm()
 implement hook functions. There are 4 hook functions available for template.php:
 
 hook_css_alter
