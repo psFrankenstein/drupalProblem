@@ -1,3 +1,5 @@
+
+
 The .tpl.php files live near the city gates and are ready to produce code for the rest of the world. 
 Moving towards the core of the city (our Drupal site) there is a very strong file: template.php. 
 This file supports .tpl.php by providing new variables, changing variables, getting the HTML ready for pieces of our site and more.
