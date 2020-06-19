@@ -1,0 +1,37 @@
+The .tpl.php files live near the city gates and are ready to produce code for the rest of the world. 
+Moving towards the core of the city (our Drupal site) there is a very strong file: template.php. 
+This file supports .tpl.php by providing new variables, changing variables, getting the HTML ready for pieces of our site and more.
+
+Inside template.php there are 4 categories of things one can do:
+
+write preprocess functions, like MYTHEME_preprocess_page(&$variables) or MYTHEME_preprocess_node(&$variables). 
+With the aid of preprocess functions we can add or alter variables inside tpl.php files. 
+Our main weapon: kpr($variables) or dpm($variables) provided by the devel module.
+write theme functions like MYTHEME_links($variables) or MYTHEME_breadcrumb($variables). 
+Through theme functions we change the HTML output of some chunks of our site, like the breadcrumb. 
+Main weapon: devel themer. (We check which theme function is responsible for the HTML output and override that one)
+preprocess functions for theme functions. We manage to change a variable used in a theme function.
+For example, MYTHEME_preprocess_username(&$variables) prepares the variables for the theme_username(). We could put the code directly inside the corresponding theme functions, but then we would probably have a mess. (anyway, that's the idea behind the separation of the code here, and is not obligatory). Main weapon: kpr() or dpm()
+implement hook functions. There are 4 hook functions available for template.php:
+
+hook_css_alter
+hook_js_alter
+hook_page_alter
+hook_form_alter
+The first two change the css/js files loaded on a site (the one's we see as @import blah blah when we view the source code,
+and we can tell Drupal not to load a file (even if it a default module.css or anything else)
+
+The third is used to change things around, regarding the whole page element of Drupal.
+So for example, we can move things around, from a node of the main content to the second block of the sidebar, etc
+
+With the last one we can change variables inside any form in Drupal.
+Main methodology: call debug($form_id) to take the unique id of the form you want to play with then target this form by if ($form_id == blabla), 
+then call dpm($form) or debug($form) to see what's inside the specific form and alter variables, etc.
+
+And YES, of course you can use both a preprocess function AND a specific .tpl.php for example:
+
+function MYTHEME_preprocess_node(&$variables){
+if ($variables['type'] == 'article')
+$variables['blabla'] = .. // creates a variable to be used in node.tpl.php
+}  
+then create node--article.tpl.php and print that $blabla there
