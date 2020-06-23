@@ -14,3 +14,6 @@ https://api.drupal.org/api/drupal/themes%21seven%21template.php/7.x
 
 # =======================================
 https://www.drupal.org/docs/7/themes/zen/html-templates-and-other-php-pages  
+
+# ==========  preprocess  ===============
+https://www.purencool.digital/development/drupal-7-preprocess-tutorial-adding-variable-to-template
